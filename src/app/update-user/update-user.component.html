@@ -1,0 +1,9 @@
+<h1>Sua</h1>
+<form [formGroup]="userForm" (ngSubmit)="editUser()">
+  Name:          <input type="text" formControlName="name" id="name" [value]="user.name"><br>
+  Number Phone:  <input type="number" formControlName="number_phone" id="numberPhone" value="{{user.number_phone}}"><br>
+  Email:         <input type="text" formControlName="email" id="email" value="{{user.email}}">
+  <button type="submit">
+    {{user.name}}</button>
+</form>
+

@@ -1,0 +1,9 @@
+<h2>Danh sach User </h2>
+<div *ngFor="let user of list">
+  <div>ID: {{user.id}}</div>
+  <div>Name: {{user.name}}</div>
+  <div>Number: {{user.number_phone}}</div>
+  <div>Email: {{user.email}}</div>
+  <button [routerLink]="['/edit', user.id]">Edit</button>
+  <button></button>
+</div>
