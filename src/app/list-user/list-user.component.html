@@ -1,9 +1,20 @@
 <h2>Danh sach User </h2>
-<div *ngFor="let user of list">
-  <div>ID: {{user.id}}</div>
-  <div>Name: {{user.name}}</div>
-  <div>Number: {{user.number_phone}}</div>
-  <div>Email: {{user.email}}</div>
-  <button [routerLink]="['/edit', user.id]">Edit</button>
-  <button></button>
-</div>
+<table>
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Number Phone</td>
+    <td>Email</td>
+    <td>Edit</td>
+    <td>Delete</td>
+    <td><button [routerLink]="['/create']" class="btn btn-outline-warning">Create</button></td>
+  </tr>
+  <tr *ngFor="let user of list">
+      <td> {{user.id}}</td>
+      <td> {{user.name}}</td>
+      <td> {{user.number_phone}}</td>
+      <td> {{user.email}}</td>
+    <td><button [routerLink]="['/edit', user.id]">Edit</button></td>
+    <td><button (click)="delete(user.id)">Delete</button></td>
+  </tr>
+</table>

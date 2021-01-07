@@ -1,7 +1,21 @@
 <h1>Tạo mới 1 User</h1>
 <form [formGroup]="userForm" (ngSubmit)="createUser()">
-  Name:          <input type="text" formControlName="name" id="name"><br>
-  Number Phone:  <input type="number" formControlName="number_phone" id="numberPhone"><br>
-  Email:         <input type="text" formControlName="email" id="email">
-  <button type="submit">Tạo mới</button>
+  <table>
+    <tr>
+      <td>Name: </td>
+      <td><input type="text" formControlName="name" id="name"></td>
+    </tr>
+    <tr>
+      <td>Number Phone: </td>
+      <td><input type="number" formControlName="number_phone" id="numberPhone"></td>
+    </tr>
+    <tr>
+      <td>Email: </td>
+      <td><input type="text" formControlName="email" id="email"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>  <button type="submit">Tạo mới</button></td>
+    </tr>
+  </table>
 </form>

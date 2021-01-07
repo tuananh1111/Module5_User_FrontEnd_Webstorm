@@ -1,9 +1,22 @@
-<h1>Sua</h1>
+<h1>Edit User</h1>
 <form [formGroup]="userForm" (ngSubmit)="editUser()">
-  Name:          <input type="text" formControlName="name" id="name" [value]="user.name"><br>
-  Number Phone:  <input type="number" formControlName="number_phone" id="numberPhone" value="{{user.number_phone}}"><br>
-  Email:         <input type="text" formControlName="email" id="email" value="{{user.email}}">
-  <button type="submit">
-    {{user.name}}</button>
+  <table>
+    <tr>
+      <td>Name: </td>
+      <td><input type="text" formControlName="name" id="name" ></td>
+    </tr>
+    <tr>
+      <td>Number Phone:</td>
+      <td><input type="number" formControlName="number_phone" id="numberPhone" ></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" formControlName="email" id="email" ></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button type="submit">Update</button></td>
+    </tr>
+  </table>
 </form>
 

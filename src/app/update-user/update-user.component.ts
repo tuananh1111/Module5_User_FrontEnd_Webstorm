@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from '../service/user-service.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {IUser} from '../iuser';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
@@ -10,36 +10,32 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./update-user.component.scss']
 })
 export class UpdateUserComponent implements OnInit {
-
+  id: number;
   user: IUser;
   userForm: FormGroup;
 
-  constructor(private userService: UserServiceService, private activate: ActivatedRoute,
-              private fb: FormBuilder) {
+  constructor(private userService: UserServiceService,
+              private activate: ActivatedRoute,
+              private fb: FormBuilder,
+              private router: Router) {
   }
-
-  prepareForm() {
+  ngOnInit(): void {
     this.userForm = this.fb.group({
       name: [''],
       number_phone: [''],
-      email: ['']
+      email: [''],
     });
-  }
-
-  ngOnInit(): void {
     this.activate.paramMap.subscribe((paraMap: ParamMap) => {
-      const id = paraMap.get('id');
-      this.getUserById(id);
+      this.id = paraMap.get('id');
+      this.userService.getUserById(this.id).subscribe(value => {
+        this.user = value;
+        this.userForm.patchValue({
+          name: this.user.name,
+          number_phone: this.user.number_phone,
+          email: this.user.email,
+        });
+      });
     });
-    this.user = {
-      id: 1,
-      name: ' ',
-      email: ' ',
-      number_phone: ' '
-    };
-    this.prepareForm();
-
-
   }
 
   getUserById(id) {
@@ -52,18 +48,16 @@ export class UpdateUserComponent implements OnInit {
   }
 
   editUser() {
-    let user: IUser = {
-      id: this.user.id,
-      name: this.userForm.get('name').value,
-      number_phone: this.userForm.get('number_phone').value,
-      email: this.userForm.get('email').value,
-    };
-
-    this.userService.updateUser(user).subscribe(result => {
-      console.log(user);
-      alert('Thanh cong!');
-    }, error => {
-      console.log(error);
-    });
+    if (!this.userForm.invalid){
+      this.user.name = this.userForm.value.name;
+      this.user.number_phone = this.userForm.value.number_phone;
+      this.user.email = this.userForm.value.email;
+      console.log(this.user);
+      this.userService.updateUser(this.user).subscribe(value => {
+        alert('Update thanh cong');
+      });
+      this.router.navigate(['list']);
+      this.userService.getAllUser();
+    }
   }
 }

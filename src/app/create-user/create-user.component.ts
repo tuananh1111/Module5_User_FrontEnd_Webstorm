@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserServiceService} from '../service/user-service.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {IUser} from '../iuser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -12,7 +13,8 @@ export class CreateUserComponent implements OnInit {
    // @ts-ignore
   userForm: FormGroup;
   constructor(private service: UserServiceService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -27,6 +29,7 @@ export class CreateUserComponent implements OnInit {
    console.log(user);
    this.service.createUser(user).subscribe(() =>
    {alert('Them moi thanh cong');
+   this.router.navigate(['list']);
    }, error => {alert('Loi roi');
    });
   }
